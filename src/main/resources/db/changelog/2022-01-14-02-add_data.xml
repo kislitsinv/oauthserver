@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+<changeSet id="2022-01-14-02-add_data" author="kislitsinv">
+
+    <!-- oauth_client_details -->
+    <insert tableName="oauth_client_details">
+        <column name="client_id" value="candr_core"/>
+        <column name="client_secret" value="{bcrypt}$2a$12$pbl1qPVBps/J65x6Oza5WuM3RgPCXoHdau.mzVWKHSL1d2Z19QCK2"/>
+        <column name="web_server_redirect_uri" value="http://localhost:8080/home/cabinet"/>
+        <column name="scope" value="READ,WRITE"/>
+        <column name="access_token_validity" value="3600"/>
+        <column name="refresh_token_validity" value="10000"/>
+        <column name="resource_ids" value="inventory,payment"/>
+        <column name="authorized_grant_types" value="authorization_code,password,refresh_token,implicit"/>
+        <column name="additional_information" value="{}"/>
+    </insert>
+
+    <!-- permission -->
+    <insert tableName="permission">
+        <column name="id" value="1"/>
+        <column name="name" value="create"/>
+    </insert>
+    <insert tableName="permission">
+        <column name="id" value="2"/>
+        <column name="name" value="read"/>
+    </insert>
+    <insert tableName="permission">
+        <column name="id" value="3"/>
+        <column name="name" value="update"/>
+    </insert>
+    <insert tableName="permission">
+        <column name="id" value="4"/>
+        <column name="name" value="delete"/>
+    </insert>
+
+    <!-- role -->
+    <insert tableName="role">
+        <column name="id" value="1"/>
+        <column name="name" value="ROLE_ADMIN"/>
+    </insert>
+    <insert tableName="role">
+        <column name="id" value="2"/>
+        <column name="name" value="ROLE_USER"/>
+    </insert>
+
+    <!-- user -->
+    <insert tableName="user">
+        <column name="id" value="1"/>
+        <column name="username" value="user1"/>
+        <column name="password" value="{bcrypt}$2a$12$pbl1qPVBps/J65x6Oza5WuM3RgPCXoHdau.mzVWKHSL1d2Z19QCK2"/>
+        <column name="email" value="user1@xxxx.xxx"/>
+        <column name="active" value="true"/>
+    </insert>
+    <insert tableName="user">
+        <column name="id" value="2"/>
+        <column name="username" value="user2"/>
+        <column name="password" value="{bcrypt}$2a$12$pbl1qPVBps/J65x6Oza5WuM3RgPCXoHdau.mzVWKHSL1d2Z19QCK2"/>
+        <column name="email" value="user2@xxxx.xxx"/>
+        <column name="active" value="true"/>
+    </insert>
+
+    <!-- permission-role -->
+    <insert tableName="permission_role">
+        <column name="id" value="1"/>
+        <column name="permission_id" value="1"/>
+        <column name="role_id" value="1"/>
+    </insert>
+    <insert tableName="permission_role">
+        <column name="id" value="2"/>
+        <column name="permission_id" value="2"/>
+        <column name="role_id" value="1"/>
+    </insert>
+    <insert tableName="permission_role">
+        <column name="id" value="3"/>
+        <column name="permission_id" value="3"/>
+        <column name="role_id" value="1"/>
+    </insert>
+    <insert tableName="permission_role">
+        <column name="id" value="4"/>
+        <column name="permission_id" value="4"/>
+        <column name="role_id" value="1"/>
+    </insert>
+    <insert tableName="permission_role">
+        <column name="id" value="5"/>
+        <column name="permission_id" value="2"/>
+        <column name="role_id" value="2"/>
+    </insert>
+    <insert tableName="permission_role">
+        <column name="id" value="6"/>
+        <column name="permission_id" value="3"/>
+        <column name="role_id" value="2"/>
+    </insert>
+
+    <!-- role-user -->
+    <insert tableName="role_user">
+        <column name="id" value="1"/>
+        <column name="user_id" value="1"/>
+        <column name="role_id" value="1"/>
+    </insert>
+    <insert tableName="role_user">
+        <column name="id" value="2"/>
+        <column name="user_id" value="2"/>
+        <column name="role_id" value="2"/>
+    </insert>
+
+</changeSet>
+</databaseChangeLog>

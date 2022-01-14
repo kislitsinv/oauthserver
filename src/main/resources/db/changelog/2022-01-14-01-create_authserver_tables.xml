@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.4.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-4.5.xsd">
+
+<changeSet id="2022-01-14-01-create_authserver_tables" author="kislitsinv">
+    <!-- oauth_client_details -->
+    <createTable tableName="oauth_client_details">
+        <column name="client_id" type="varchar(255)">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="client_secret" type="varchar(255)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="web_server_redirect_uri" type="varchar(255)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="scope" type="varchar(255)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="access_token_validity" type="int">
+            <constraints nullable="true"/>
+        </column>
+        <column name="refresh_token_validity" type="int">
+            <constraints nullable="true"/>
+        </column>
+        <column name="resource_ids" type="varchar(1024)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="authorized_grant_types" type="varchar(1024)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="authorities" type="varchar(1024)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="additional_information" type="varchar(4096)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="autoapprove" type="varchar(255)">
+            <constraints nullable="true"/>
+        </column>
+    </createTable>
+
+    <!-- permission -->
+    <createTable tableName="permission">
+        <column name="id" type="bigint">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="name" type="varchar(255)">
+            <constraints nullable="false" unique="true" uniqueConstraintName="UC_PERMISSION_NAME"/>
+        </column>
+    </createTable>
+
+    <!-- role -->
+    <createTable tableName="role">
+        <column name="id" type="bigint">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="name" type="varchar(255)">
+            <constraints nullable="false" unique="true" uniqueConstraintName="UC_ROLE_NAME"/>
+        </column>
+    </createTable>
+
+    <!-- user -->
+    <createTable tableName="user">
+        <column name="id" type="bigint">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="username" type="varchar(100)">
+            <constraints nullable="false" unique="true" uniqueConstraintName="UC_USER_USERNAME"/>
+        </column>
+        <column name="password" type="varchar(512)">
+            <constraints nullable="false"/>
+        </column>
+        <column name="email" type="varchar(255)">
+            <constraints nullable="true"/>
+        </column>
+        <column name="active" type="boolean" defaultValue="true">
+            <constraints nullable="false"/>
+        </column>
+        <column name="account_expired" type="boolean" defaultValue="false">
+            <constraints nullable="false"/>
+        </column>
+        <column name="credentials_expired" type="boolean" defaultValue="false">
+            <constraints nullable="false"/>
+        </column>
+        <column name="account_locked" type="boolean" defaultValue="false">
+            <constraints nullable="false"/>
+        </column>
+    </createTable>
+
+    <!-- permission-role -->
+    <createTable tableName="permission_role">
+        <column name="id" type="bigint">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="permission_id" type="int">
+            <constraints nullable="true" foreignKeyName="permission_role_ibfk_1" referencedTableName="permission" referencedColumnNames="id"/>
+        </column>
+        <column name="role_id" type="int">
+            <constraints nullable="true" foreignKeyName="permission_role_ibfk_2" referencedTableName="role" referencedColumnNames="id"/>
+        </column>
+    </createTable>
+
+    <!-- role-user -->
+    <createTable tableName="role_user">
+        <column name="id" type="bigint">
+            <constraints primaryKey="true"/>
+        </column>
+        <column name="role_id" type="int">
+            <constraints nullable="true" foreignKeyName="role_user_ibfk_1" referencedTableName="role" referencedColumnNames="id"/>
+        </column>
+        <column name="user_id" type="int">
+            <constraints nullable="true" foreignKeyName="role_user_ibfk_2" referencedTableName="user" referencedColumnNames="id"/>
+        </column>
+    </createTable>
+</changeSet>
+</databaseChangeLog>
