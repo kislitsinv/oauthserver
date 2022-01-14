@@ -18,12 +18,10 @@ Depending on what you've got in DB (oauth_client_details) you can do things like
 
 POST to http://localhost:40001/oauth/token with Authorization Basic base64_login:pass and x-www-form-urlencoded body with
 
-<code>
+```
  grant_type:password
- 
  username:your_username
- 
  password:your_password
-</code>
+```
 
 and the magic should happen!
