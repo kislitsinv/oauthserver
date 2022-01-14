@@ -1,5 +1,5 @@
 ## WHAT'S THAT
-It is a custom oauth-server mainly for microservices architecture, but could be used to implement a common user authorization as well
+It is a custom oauth2 server mainly for microservices architecture, but could be used to implement a common user authorization as well
 
 ## HOW TO USE
 This is Java 1.8 maven project, so after indexing and having all dependencies onboard
