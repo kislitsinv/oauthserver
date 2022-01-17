@@ -25,5 +25,5 @@
 /build/
 
 ### Properties & other stuff ###
-/resources/application.*
-/resources/changelog/*.xml
+/src/main/resources/application.*
+/src/main/resources/db/changelog/*.xml
